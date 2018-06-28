@@ -1,3 +1,18 @@
+<?php 
+include "insert.php";
+$koneksi = new KonekDatabase(); // memanggil class
+
+$namatabel = 'mahasiswa';
+if(isset($_GET['edit'])){
+	$npm = $_GET['edit'];
+	$datas = $koneksi->tampilDetail($namatabel, $npm);
+}else{
+	$datas = array(null);
+}
+foreach ($datas as $data) {
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +20,8 @@
 </head>
 <body>
 <form action="index.php" method="POST">
-	<label>NPM </label><input type="text" name="npm"><br>
-	<label>Nama </label><input type="text" name="nama"><br>
+	<label>NPM </label><input type="text" name="npm" value="<?php echo $data['npm']; ?>"><br>
+	<label>Nama </label><input type="text" name="nama" value="<?php echo $data['nama']; ?>"><br>
 
 	<label>Sex </label>
 	<select name="sex">
@@ -15,7 +30,7 @@
 	</select>
 	<br>
 
-	<label>Tahun Masuk </label><input type="text" name="thn_masuk"><br>
+	<label>Tahun Masuk </label><input type="text" name="thn_masuk" value="<?php echo $data['thn_masuk']; ?>"><br>
 
 	<label>Prodi</label>
 	<select name="idprodi">
@@ -46,8 +61,23 @@
 		</option>
 	</select>
 	<br>
+<?php
+}
+$koneksi=null; // menutup koneksi dari database
+?>
 
+
+<?php 
+	if(isset($_GET['edit'])){
+?>
+	<input type="submit" name="update" value="Simpan" >
+<?php 
+	}else{
+?>
 	<input type="submit" name="insert" value="Simpan" >
+<?php 
+	}
+?>
 </form>
 </body>
 </html>

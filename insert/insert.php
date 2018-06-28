@@ -75,7 +75,7 @@ class KonekDatabase
  function insertData($namatabel, $datas)
  {
  	$kunci = implode(", ",array_keys($datas));
- 	
+
  	$i = 0;
  	foreach ($datas as $key => $value) {
  		$nilaiArray[$i] = "'".$value."'";
@@ -101,6 +101,55 @@ class KonekDatabase
 		header("Location:index.php");
 	}
  }
+
+ function tampilDetail($namatabel, $npm)
+ {
+    $conn = $this->ConnectMysql();
+	$sql = "SELECT * FROM $namatabel WHERE npm = $npm";
+	$q = $conn->query($sql);
+    $q->setFetchMode(PDO::FETCH_ASSOC);	
+	while($row = $q->fetch()): 
+	   $data[] = $row;
+	endwhile;
+    return $data;
+ }
+
+
+
+ function updateData($namatabel, $datas, $npm)
+ {
+ 	
+ 	$i = 0;
+ 	foreach ($datas as $key => $value) {
+ 		$nilaiArray[$i] = "'".$value."'";
+ 		$i++;
+ 	}
+
+ 	$nilai = $nilaiArray;
+ 	$kunci = array_keys($datas);
+ 	// $finalValue = array(
+ 	// 	$kunci => $nilai, 
+ 	// );
+ 	$nama = $datas['nama'];
+ 	$sex = $datas['sex'];
+ 	$thn_masuk = $datas['thn_masuk'];
+ 	$idprodi = $datas['idprodi'];
+ 	$idstatusaka = $datas['idstatusaka'];
+
+    $conn = $this->ConnectMysql();
+
+	// "UPDATE $namatabel SET `nama` = 'dodol', `tempat_lahir` = 'jawa', `sex` = 'P' WHERE `mahasiswa`.`npm` = $npm";
+
+    // UPDATE $namatabel SET `tempat_lahir` = 'jawa' WHERE `mahasiswa`.`idmhs` = 374;
+
+    $sql = "UPDATE $namatabel SET nama = '$nama', sex = '$sex', thn_masuk = $thn_masuk, idprodi = $idprodi, idstatusaka = $idstatusaka WHERE npm = $npm";
+	$q = $conn->query($sql);
+	if($q){
+		header("Refresh:0");
+	}
+ }
+
+
 }
 
 

@@ -45,6 +45,21 @@ $namatabel = 'mahasiswa';
 		// header("Location : index.php");
 	}
 
+	if(isset($_POST['update'])){
+		$data = array(
+			'npm' => $_POST['npm'],
+			'nama' => $_POST['nama'],
+			'sex' => $_POST['sex'],
+			'thn_masuk' => $_POST['thn_masuk'],
+			'idprodi' => $_POST['idprodi'],
+			'idstatusaka' => $_POST['idstatusaka'],
+		);
+		$npm = $_POST['npm'];
+		$koneksi->updateData($namatabel, $data, $npm);
+		// header("Location : index.php");
+	}
+
+
 	if(isset($_GET['delete'])){
 		$npm = $_GET['delete'];
 		$koneksi->hapusData($namatabel, $npm);
