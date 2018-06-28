@@ -65,6 +65,8 @@ class KonekDatabase
 	foreach($namadata as $datay) {
 		echo "<tr>";
 		echo "<td>".$datay['npm'].'</td><td>'.$datay['nama'].'</td>';
+		echo "<td><a href='form.php?edit=".$datay['npm']."'>Edit</a></td>";
+		echo "<td><a href='?delete=".$datay['npm']."'>Delete</a></td>";
 		echo "</tr>";
 	}
 	echo "</table>"; 	
@@ -89,7 +91,20 @@ class KonekDatabase
 		header("Refresh:0");
 	}
  }
+
+ function hapusData($namatabel, $npm)
+ {
+    $conn = $this->ConnectMysql();
+    $sql = "DELETE FROM $namatabel WHERE `mahasiswa`.`npm` = $npm";
+	$q = $conn->query($sql);
+	if($q){
+		header("Location:index.php");
+	}
+ }
 }
+
+
+
  
 ?>
 

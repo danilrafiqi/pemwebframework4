@@ -1,9 +1,21 @@
-<a href="form.php">Insert</a>
-<form action="" method="get">
-	<input type="text" name="cari" placeholder="Masukkan NPM"><button>cari</button>
-</form>
-<?php
+<?php 
+	if(isset($_GET['insert']) || isset($_GET['edit'])){
+?>
+	<a href="index.php">Home</a>
+<?php 
+	}else{
+?>
+	<a href="form.php">Insert</a>
+	<form action="" method="get">
+		<input type="text" name="cari" placeholder="Masukkan NPM"><button>cari</button>
+	</form>
+<?php 
+	}
+?>
 
+
+
+<?php
 include "insert.php";
 $koneksi = new KonekDatabase(); // memanggil class
 
@@ -32,6 +44,12 @@ $namatabel = 'mahasiswa';
 		$koneksi->insertData($namatabel, $data);
 		// header("Location : index.php");
 	}
+
+	if(isset($_GET['delete'])){
+		$npm = $_GET['delete'];
+		$koneksi->hapusData($namatabel, $npm);
+	}	
+
 
 $koneksi=null; // menutup koneksi dari database
 ?>
