@@ -62,6 +62,7 @@ class KonekDatabase
  
  function TampilData($namadata){
 	echo "<table border='1'>";
+	echo "<tr><td>NPM</td><td>Nama</td><td colspan='2'>Action</td></tr>";
 	foreach($namadata as $datay) {
 		echo "<tr>";
 		echo "<td>".$datay['npm'].'</td><td>'.$datay['nama'].'</td>';
@@ -125,8 +126,8 @@ class KonekDatabase
  		$i++;
  	}
 
- 	$nilai = $nilaiArray;
- 	$kunci = array_keys($datas);
+ 	// $nilai = $nilaiArray;
+ 	// $kunci = array_keys($datas);
  	// $finalValue = array(
  	// 	$kunci => $nilai, 
  	// );
@@ -137,11 +138,6 @@ class KonekDatabase
  	$idstatusaka = $datas['idstatusaka'];
 
     $conn = $this->ConnectMysql();
-
-	// "UPDATE $namatabel SET `nama` = 'dodol', `tempat_lahir` = 'jawa', `sex` = 'P' WHERE `mahasiswa`.`npm` = $npm";
-
-    // UPDATE $namatabel SET `tempat_lahir` = 'jawa' WHERE `mahasiswa`.`idmhs` = 374;
-
     $sql = "UPDATE $namatabel SET nama = '$nama', sex = '$sex', thn_masuk = $thn_masuk, idprodi = $idprodi, idstatusaka = $idstatusaka WHERE npm = $npm";
 	$q = $conn->query($sql);
 	if($q){

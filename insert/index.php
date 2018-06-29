@@ -1,18 +1,7 @@
-<?php 
-	if(isset($_GET['insert']) || isset($_GET['edit'])){
-?>
-	<a href="index.php">Home</a>
-<?php 
-	}else{
-?>
-	<a href="form.php">Insert</a>
-	<form action="" method="get">
-		<input type="text" name="cari" placeholder="Masukkan NPM"><button>cari</button>
-	</form>
-<?php 
-	}
-?>
-
+<a href="form.php">Insert</a>
+<form action="" method="get">
+	<input type="text" name="cari" placeholder="Masukkan NPM"><button>cari</button>
+</form>
 
 
 <?php

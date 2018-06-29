@@ -9,7 +9,7 @@ if(isset($_GET['edit'])){
 }else{
 	$datas = array(null);
 }
-foreach ($datas as $data) {
+foreach ($datas as $data):
 ?>
 
 
@@ -20,64 +20,116 @@ foreach ($datas as $data) {
 </head>
 <body>
 <form action="index.php" method="POST">
-	<label>NPM </label><input type="text" name="npm" value="<?php echo $data['npm']; ?>"><br>
-	<label>Nama </label><input type="text" name="nama" value="<?php echo $data['nama']; ?>"><br>
+	<table width="100%">
+		<tr>
+			<td>				
+				<label>NPM </label>
+			</td>
+			<td>
+				<input type="text" name="npm" value="<?php echo $data['npm']; ?>" <?php if(isset($_GET['edit'])){ echo "readonly";} ?> >
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<label>Nama </label>
+			</td>
+			<td>				
+				<input type="text" name="nama" value="<?php echo $data['nama']; ?>">
+			</td>
+		</tr>
 
-	<label>Sex </label>
-	<select name="sex">
-		<option value="L">L</option>
-		<option value="P">P</option>		
-	</select>
-	<br>
+		<tr>
+			<td>
+				<label>Tahun Masuk </label>
+			</td>
+			<td>
+				<input type="text" name="thn_masuk" value="<?php echo $data['thn_masuk']; ?>">
+			</td>
+		</tr>
 
-	<label>Tahun Masuk </label><input type="text" name="thn_masuk" value="<?php echo $data['thn_masuk']; ?>"><br>
+		<tr>
+			<td>
+				<label>Sex </label>		
+			</td>
+			<td>
+				<select name="sex">
+					<option value="L">L</option>
+					<option value="P">P</option>		
+				</select>				
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<label>Prodi</label>		
+			</td>
+			<td>
+				<select name="idprodi">
+					<?php
+					$kdb = new PDO('mysql:host=localhost;dbname=db_akademik',"root","");
+					$sqlquery = "SELECT * FROM prodi order by idprodi ASC";
+					$hasilquery = $kdb->query( $sqlquery);
+					while ( $baris = $hasilquery->fetch()) {
+					$value = $baris["idprodi"];
+					$caption = $baris ["nmprodi"];
+					?>
+					<option value="<?php echo $value ?>" >
+					 <?php echo $caption; ?> 
+					</option>
+					<?php
+					}
+					?>
+				</select>				
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<label>Status Akademik</label>				
+			</td>
+			<td>
+				<select name="idstatusaka">
+					<?php
+					$kdb = new PDO('mysql:host=localhost;dbname=db_akademik',"root","");
+					$sqlquery = "SELECT * FROM status_akademik order by idstatusaka ASC";
+					$hasilquery = $kdb->query( $sqlquery);
+					while ( $baris = $hasilquery->fetch()) {
+					$value = $baris["idstatusaka"];
+					$caption = $baris ["nmstatusaka"];
+					?>
+					<option value="<?php echo $value ?>" >
+					 <?php echo $caption; ?> 
+					</option>
+					<?php
+					}
+					?>
+				</select>				
+			</td>
+		</tr>
 
-	<label>Prodi</label>
-	<select name="idprodi">
-		<option value="4" >Akuntansi Paja </option>
-		<option value="9" >Minyak</option>
-		<option value="10" >Perminyakan</option>
-	</select>	
-	<br>
-
-	<select name="idstatusaka">
-		<option value="1" >
-		 Aktif 
-		</option>
-		<option value="2" >
-		 Drop Out 
-		</option>
-		<option value="3" >
-		 Alumni 
-		</option>
-		<option value="4" >
-		 Cuti 
-		</option>
-		<option value="6" >
-		 Mau wisuda 
-		</option>
-		<option value="12" >
-		 Bentar Lagi Wisuda 
-		</option>
-	</select>
-	<br>
-<?php
-}
-$koneksi=null; // menutup koneksi dari database
-?>
+		<tr>
+			<td>
+				<?php
+				endforeach;
+				$koneksi=null; // menutup koneksi dari database
+				?>
 
 
-<?php 
-	if(isset($_GET['edit'])){
-?>
-	<input type="submit" name="update" value="Simpan" >
-<?php 
-	}else{
-?>
-	<input type="submit" name="insert" value="Simpan" >
-<?php 
-	}
-?>
+				<?php 
+					if(isset($_GET['edit'])){
+				?>
+					<input type="submit" name="update" value="Simpan" >
+				<?php 
+					}else{
+				?>
+					<input type="submit" name="insert" value="Simpan" >
+				<?php 
+					}
+				?>
+			</td>
+		</tr>	
+	</table>
 </form>
 </body>
 </html>
