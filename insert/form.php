@@ -69,9 +69,14 @@ foreach ($datas as $data):
 					<?php
 						$datax = $koneksi->tampil('prodi');						
 						foreach ($datax as $datay):
+							if($data['idprodi'] == $datay['idprodi']){
+								$pilih = 'selected';
+							}else{
+								$pilih = '';
+							}
 					?>
 
-					<option value="<?php echo $datay['idprodi']; ?>" >
+					<option value="<?php echo $datay['idprodi']; ?>" <?php echo $pilih; ?> >
 					 <?php echo $datay['nmprodi']; ?> 
 					</option>
 					<?php 
@@ -90,9 +95,14 @@ foreach ($datas as $data):
 					<?php
 						$datax = $koneksi->tampil('status_akademik');						
 						foreach ($datax as $datay):
+							if($data['idstatusaka'] == $datay['idstatusaka']){
+								$pilih = 'selected';
+							}else{
+								$pilih = '';
+							}
 					?>
 
-					<option value="<?php echo $datay['idstatusaka']; ?>" >
+					<option value="<?php echo $datay['idstatusaka']; ?>" <?php echo $pilih; ?> >
 					 <?php echo $datay['nmstatusaka']; ?> 
 					</option>
 					<?php 
