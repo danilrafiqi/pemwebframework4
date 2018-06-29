@@ -43,9 +43,9 @@ class KonekDatabase
  function CariData($namatabel, $npm='')
  {
     $conn = $this->ConnectMysql();
-	$sql = "SELECT * FROM $namatabel";
+	$sql = "SELECT * FROM $namatabel INNER JOIN prodi WHERE mahasiswa.idprodi = prodi.idprodi";
 	if(!empty($npm)){
-		$sql .= " WHERE npm like '$npm%'";
+		$sql .= " AND npm like '$npm%'";
 	}
 
 	$q = $conn->query($sql);
@@ -62,10 +62,10 @@ class KonekDatabase
  
  function TampilData($namadata){
 	echo "<table border='1'>";
-	echo "<tr><td>NPM</td><td>Nama</td><td colspan='2'>Action</td></tr>";
+	echo "<tr><td>NPM</td><td>Nama</td><td>Program Studi</td><td colspan='2'>Action</td></tr>";
 	foreach($namadata as $datay) {
 		echo "<tr>";
-		echo "<td>".$datay['npm'].'</td><td>'.$datay['nama'].'</td>';
+		echo "<td>".$datay['npm'].'</td><td>'.$datay['nama'].'</td><td>'.$datay['nmprodi'].'</td>';
 		echo "<td><a href='form.php?edit=".$datay['npm']."'>Edit</a></td>";
 		echo "<td><a href='?delete=".$datay['npm']."'>Delete</a></td>";
 		echo "</tr>";
