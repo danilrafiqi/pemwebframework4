@@ -67,18 +67,15 @@ foreach ($datas as $data):
 			<td>
 				<select name="idprodi">
 					<?php
-					$kdb = new PDO('mysql:host=localhost;dbname=db_akademik',"root","");
-					$sqlquery = "SELECT * FROM prodi order by idprodi ASC";
-					$hasilquery = $kdb->query( $sqlquery);
-					while ( $baris = $hasilquery->fetch()) {
-					$value = $baris["idprodi"];
-					$caption = $baris ["nmprodi"];
+						$datax = $koneksi->tampil('prodi');						
+						foreach ($datax as $datay):
 					?>
-					<option value="<?php echo $value ?>" >
-					 <?php echo $caption; ?> 
+
+					<option value="<?php echo $datay['idprodi']; ?>" >
+					 <?php echo $datay['nmprodi']; ?> 
 					</option>
-					<?php
-					}
+					<?php 
+						endforeach
 					?>
 				</select>				
 			</td>
@@ -91,18 +88,15 @@ foreach ($datas as $data):
 			<td>
 				<select name="idstatusaka">
 					<?php
-					$kdb = new PDO('mysql:host=localhost;dbname=db_akademik',"root","");
-					$sqlquery = "SELECT * FROM status_akademik order by idstatusaka ASC";
-					$hasilquery = $kdb->query( $sqlquery);
-					while ( $baris = $hasilquery->fetch()) {
-					$value = $baris["idstatusaka"];
-					$caption = $baris ["nmstatusaka"];
+						$datax = $koneksi->tampil('status_akademik');						
+						foreach ($datax as $datay):
 					?>
-					<option value="<?php echo $value ?>" >
-					 <?php echo $caption; ?> 
+
+					<option value="<?php echo $datay['idstatusaka']; ?>" >
+					 <?php echo $datay['nmstatusaka']; ?> 
 					</option>
-					<?php
-					}
+					<?php 
+						endforeach
 					?>
 				</select>				
 			</td>

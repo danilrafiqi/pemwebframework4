@@ -145,6 +145,17 @@ class KonekDatabase
 	}
  }
 
+ function tampil($namatabel){
+    $conn = $this->ConnectMysql();
+	$sql = "SELECT * FROM $namatabel";
+	$q = $conn->query($sql);
+    $q->setFetchMode(PDO::FETCH_ASSOC);	
+	while($row = $q->fetch()): 
+	   $data[] = $row;
+	endwhile;
+    return $data; 	
+ }
+
 
 }
 
